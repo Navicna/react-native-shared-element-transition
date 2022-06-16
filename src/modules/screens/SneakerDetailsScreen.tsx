@@ -10,6 +10,7 @@ import {
   ParamListBase,
   RouteProp,
 } from "@react-navigation/native";
+import { StyledView } from "react-native-dev-ui";
 
 const sizes = ["UK 36", "UK 37", "UK 38", "UK 39", "UK 30"];
 
@@ -21,6 +22,11 @@ const animation = {
 const animation2 = {
   0: { opacity: 0, translateY: -100 },
   1: { opacity: 1, translateY: 0 },
+};
+
+const animation3 = {
+  0: { opacity: 0 },
+  1: { opacity: 1 },
 };
 
 export default function SneakerDetailsScreen({
@@ -38,20 +44,8 @@ export default function SneakerDetailsScreen({
   const sneaker = route.params?.sneaker;
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: 16 + 30,
-        backgroundColor: "white",
-        alignContent: "center",
-      }}
-    >
-      <View
-        style={{
-          justifyContent: "space-around",
-          flexDirection: "row",
-        }}
-      >
+    <StyledView flex={1} pt={16 + 30} bgColor="white">
+      <StyledView flexDirection="row" justifyContent="space-around">
         <Pressable onPress={goBack}>
           <RoundedView>
             <Image
@@ -72,7 +66,7 @@ export default function SneakerDetailsScreen({
         <RoundedView>
           <Image source={Images.cartBag} />
         </RoundedView>
-      </View>
+      </StyledView>
 
       <Animatable.View
         useNativeDriver={true}
@@ -130,8 +124,10 @@ export default function SneakerDetailsScreen({
           {sneaker.price}
         </Animatable.Text>
       </Animatable.View>
-
-      <View
+      <Animatable.View
+        useNativeDriver={true}
+        animation={animation3}
+        duration={1000}
         style={{
           width: 120,
           alignItems: "center",
@@ -141,7 +137,7 @@ export default function SneakerDetailsScreen({
         }}
       >
         <Image source={Images.nikeBox} />
-      </View>
+      </Animatable.View>
       <Animatable.View
         useNativeDriver={true}
         animation={animation2}
@@ -167,7 +163,7 @@ export default function SneakerDetailsScreen({
           </RoundedView>
         ))}
       </Animatable.View>
-    </View>
+    </StyledView>
   );
 }
 
